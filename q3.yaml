@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counter-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: counter
+  template:
+    metadata:
+      labels:
+        app: counter
+    spec:
+      containers:
+      - name: count
+        image: busybox
+        args: [/bin/sh, -c,
+               'i=0; while true; do echo "$i: Hello"; i=$((i+1)); sleep 1; done']
